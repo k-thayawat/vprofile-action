@@ -56,3 +56,27 @@ jobs:
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  Build-and-Publish:
+    needs: Testing
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+        - name: Code Checkout
+          uses: actions/checkout@v4
+
+        - name: upload image to ECR
+          uses: appleboy/docker-ecr-action@master
+          with:
+            access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            registry: ${{ secrets.ECR_REGISTRY}}
+            region: ${{ env.AWS_REGION }}
+            tags: latest, ${{ github.run_number }}
+            daemon_off: false
+            dockerfile: ./Dockerfile
+            context: ./
+
+
+    
+
