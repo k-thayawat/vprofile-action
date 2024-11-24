@@ -12,6 +12,7 @@ env:
 jobs:
   Testing:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
