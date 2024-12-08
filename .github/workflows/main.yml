@@ -73,7 +73,7 @@ jobs:
             secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             registry: ${{ secrets.ECR_REGISTRY }}
             region: ${{ env.AWS_REGION }}
-            tags: lastest,${{ github.run_number }}
+            tags: latest,${{ github.run_number }}
             daemon_off: false
             dockerfile: ./Dockerfile
             context: ./
